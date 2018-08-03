@@ -1,0 +1,29 @@
+<ActionBar title="Menu" class="action-bar">
+</ActionBar>
+<ScrollView orientation="vertical" class="page">
+    <GridLayout rows="auto auto auto" class="m-5">
+        <StackLayout row="0" class="m-5 p-10 border">
+            <Label class="h3" text="Our History"></Label>
+            <StackLayout class="m-t-4">
+                <Label class="body" textWrap="true" text="Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us."></Label>
+                <Label class="body" textWrap="true" text="The restaurant traces its humble beginnings to The Frying Pan, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan."></Label>
+            </StackLayout>
+        </StackLayout>
+        <Label row="1" class="h3 m-15" text="Corporate Leadership"></Label>
+        <ListView row="2" [items]="leaders" class="list-group" *ngIf="leaders" height="1500">
+            <ng-template let-leader="item">
+              <StackLayout class="list-group-item" orientation="horizontal">
+                <Image [src]="BaseURL + leader.image" class="imahe-circle thumb" width="50" height="50"></Image>
+                <GridLayout class="list-group-item" rows="auto auto *">
+                    <Label row="0" class="list-group-item-heading" [text]="leader.name"></Label>
+                    <Label row="1" class="list-group-item-text" [text]="leader.designation"></Label>
+                    <Label row="2" class="list-group-item-text" [text]="leader.description" textWrap="true"></Label>
+                </GridLayout>
+              </StackLayout>
+            </ng-template>
+        </ListView>
+        <ActivityIndicator busy="true" width="50" height="50" *ngIf="!(leaders || errMess)" class="activity-indicator">
+        </ActivityIndicator>
+        <Label *ngIf="errMess" [text]="'Error: ' + errMess"></Label>
+    </GridLayout>
+</ScrollView>
