@@ -7,9 +7,12 @@ import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
+import { HomeComponent } from './home/home.component';
 
 import { DishService } from "./services/dish.service";
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { PromotionService } from "./services/promotion.service";
+import { LeaderService } from "./services/leader.service";
 
 import { baseURL } from './shared/baseurl';
 
@@ -33,12 +36,15 @@ import { baseURL } from './shared/baseurl';
     declarations: [
         AppComponent,
         MenuComponent,
-        DishdetailComponent
+        DishdetailComponent,
+        HomeComponent
     ],
     providers: [
         DishService,
         ProcessHTTPMsgService,
-        { provide: 'BaseURL', useValue: baseURL }
+        { provide: 'BaseURL', useValue: baseURL },
+        PromotionService,
+        LeaderService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
