@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { HttpClientModule } from '@angular/common/http';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
+import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular';
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { MenuComponent } from './menu/menu.component';
@@ -26,7 +27,8 @@ import { baseURL } from './shared/baseurl';
         NativeScriptModule,
         AppRoutingModule,
         HttpClientModule,
-        NativeScriptHttpModule
+        NativeScriptHttpModule,
+        NativeScriptUISideDrawerModule
     ],
     declarations: [
         AppComponent,
