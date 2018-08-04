@@ -4,6 +4,7 @@ import * as app from "application";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
+import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 @Component({
     selector: "ns-app",
@@ -13,7 +14,9 @@ export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private router: Router,
+        private routerExtensions: RouterExtensions,
+        public fonticon: TNSFontIconService) {
         // Use the component constructor to inject services.
     }
 
