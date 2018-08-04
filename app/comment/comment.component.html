@@ -1,0 +1,14 @@
+<StackLayout class="modal-view-style">
+    <GridLayout rows="auto auto auto auto" columns="*, *" [formGroup]="commentForm">
+        <Label class="h3 m-15" row="0" col="0" text="Your Name" textWrap="true"></Label>
+        <TextField class="input input-border" id="textAuthor" hint="Your Name" [text]="" (textChange)="onAuthorChange($event)"
+            row="0" col="1" formControlName="author"></TextField>
+        <Label class="h3 m-15" row="1" col="0" text="Rating" textWrap="true"></Label>
+        <Slider minValue="1" maxValue="5" value="5" class="slider" (onValueChange)="onRatingChange()"
+            row="1" col="1" formControlName="rating"></Slider>
+        <Label class="h3 m-15" row="2" col="0" text="Your Comment" textWrap="true"></Label>
+        <TextField class="input input-border" id="textComment" hint="Your Comment" [text]="" (textChange)="onCommentChange($event)"
+            row="2" col="1" formControlName="comment"></TextField>
+        <Button class="btn btn-primary btn-active m-15" row="3" col="0" text="Submit" (tap)="onSubmit()" [disabled]="!(commentForm.valid)"></Button>
+    </GridLayout>
+</StackLayout>
