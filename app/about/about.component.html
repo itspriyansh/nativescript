@@ -13,7 +13,7 @@
         <ListView row="2" [items]="leaders" class="list-group" *ngIf="leaders" height="1500">
             <ng-template let-leader="item">
               <StackLayout class="list-group-item" orientation="horizontal">
-                <Image [src]="BaseURL + leader.image" class="imahe-circle thumb" width="50" height="50"></Image>
+                <Image [src]="BaseURL + leader.image" class="image-circle thumb" width="50" height="50"></Image>
                 <GridLayout class="list-group-item" rows="auto auto *">
                     <Label row="0" class="list-group-item-heading" [text]="leader.name"></Label>
                     <Label row="1" class="list-group-item-text" [text]="leader.designation"></Label>

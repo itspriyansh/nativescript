@@ -2,30 +2,35 @@
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
 </ActionBar>
 <ScrollView orientation="vertical">
-    <GridLayout rows="auto auto auto" class="m-5" *ngIf="dish">
-            <StackLayout row="0" class="p-10 border">
-                <Image [src]="BaseURL + dish.image"></Image>
-                <StackLayout>
-                    <Label [text]="dish.name" class="h2"></Label>
-                    <Label [text]="dish.description" class="body"></Label>               
-                </StackLayout>
+    <GridLayout rows="auto auto auto auto" class="m-5" *ngIf="dish">
+        <StackLayout row="0" class="p-10 border">
+            <Image [src]="BaseURL + dish.image"></Image>
+            <StackLayout>
+                <Label [text]="dish.name" class="h2"></Label>
+                <Label [text]="dish.description" class="body"></Label>               
             </StackLayout>
-            <Label row="1" text="Comments" height="40" class="p-10 m-t-10 h3"></Label>
-            <ListView row="2" height="500" [items]="dish.comments" class="list-group p-10">
-                <ng-template let-comment="item">
-                  <StackLayout class="list-group-item">
-                    <Label [text]="comment.comment" textWrap="true" class="list-group-item-heading"></Label>
-                    <StackLayout orientation="horizontal">
-                        <Label [text]="comment.rating" class="list-group-item-text"></Label>
-                        <Label text="Starts" class="list-group-item-text"></Label>
-                    </StackLayout>
-                    <StackLayout orientation="horizontal">
-                        <Label [text]="'-- ' + comment.author + ', '" class="list-group-item-text"></Label>
-                        <Label [text]="comment.date | date" class="list-group-item-text"></Label>
-                    </StackLayout>
-                  </StackLayout>
-                </ng-template>
-            </ListView>
+            <GridLayout rows="*" columns="*, *, *" orientation="horizontal" class="m-t-20">
+                <Button row="0" col="0" [text]="avgstars + ' stars'" class="btn btn-rounded-sm btn-outline no-border"></Button>
+                <Button row="0" col="1" [text]="numcomments + ' comments'" class="btn btn-rounded-sm btn-outline no-border"></Button>
+                <Button row="0" col="2" [text]="(favorite ? 'fa-heart' : 'fa-heart-o') | fonticon" class="btn btn-rounded-sm btn-outline no-border fa" (tap)="addToFavorites()"></Button>
+            </GridLayout>
+        </StackLayout>
+        <Label row="1" text="Comments" height="40" class="p-10 m-t-10 h3"></Label>
+        <ListView row="2" height="500" [items]="dish.comments" class="list-group p-10">
+            <ng-template let-comment="item">
+                <StackLayout class="list-group-item">
+                <Label [text]="comment.comment" textWrap="true" class="list-group-item-heading"></Label>
+                <StackLayout orientation="horizontal">
+                    <Label [text]="comment.rating" class="list-group-item-text"></Label>
+                    <Label text="Starts" class="list-group-item-text"></Label>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label [text]="'-- ' + comment.author + ', '" class="list-group-item-text"></Label>
+                    <Label [text]="comment.date | date" class="list-group-item-text"></Label>
+                </StackLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
     </GridLayout>
     <ActivityIndicator busy="true" *ngIf="!(dish || errMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
     <Label [text]="'Error: ' + errMess" *ngIf="errMess"></Label>
