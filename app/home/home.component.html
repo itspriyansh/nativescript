@@ -1,39 +1,33 @@
 <ActionBar title="Home" class="action-bar">
 </ActionBar>
-<ScrollView orientation="vertical" class="page">
-    <GridLayout rows="auto auto auto" class="m-5">
-        <StackLayout row="0">
-            <StackLayout class="p-10 border" *ngIf="dish">
-                <Image [src]="BaseURL + dish.image"></Image>
-                <StackLayout>
-                    <Label class="h2" [text]="dish.name"></Label>
-                    <Label class="body" [text]="dish.description" textWrap="true"></Label>
-                </StackLayout>
+<StackLayout (swipe)="onSwipe($event)" class="page">
+    <GridLayout horizontalAlignment="center" verticalAlignment="center" rows="*" columns="*" height="95%">
+        <GridLayout id="leftCard" row="0" margin="5" rows="* auto" columns="*" *ngIf="dish" [visibility]="showLeftCard ? 'visible' : 'collapsed'" class="border">
+            <Image [src]="BaseURL + dish.image"></Image>
+            <StackLayout>
+                <Label class="h2" [text]="dish.name"></Label>
+                <Label class="body" [text]="dish.description" textWrap="true"></Label>
             </StackLayout>
-            <ActivityIndicator busy="true" *ngIf="!(dish || dishErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-            <Label *ngIf="dishErrMess" [text]="'Error: ' + dishErrMess"></Label>
-        </StackLayout>
-        <StackLayout row="1">
-            <StackLayout class="p-10 border" *ngIf="promotion">
-                <Image [src]="BaseURL + promotion.image"></Image>
-                <StackLayout>
-                    <Label class="h2" [text]="promotion.name"></Label>
-                    <Label class="body" [text]="promotion.description" textWrap="true"></Label>
-                </StackLayout>
+        </GridLayout>
+        <ActivityIndicator busy="true" *ngIf="!(dish || dishErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+        <Label *ngIf="dishErrMess" [text]="'Error: ' + dishErrMess"></Label>
+        <GridLayout id="rightCard" row="0" margin="5" rows="* auto" columns="*" *ngIf="promotion" [visibility]="showMiddleCard ? 'visible' : 'collapsed'" class="border">
+            <Image [src]="BaseURL + promotion.image"></Image>
+            <StackLayout>
+                <Label class="h2" [text]="promotion.name"></Label>
+                <Label class="body" [text]="promotion.description" textWrap="true"></Label>
             </StackLayout>
-            <ActivityIndicator busy="true" *ngIf="!(promotion || promoErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-            <Label *ngIf="promoErrMess" [text]="'Error: ' + promoErrMess"></Label>
-        </StackLayout>
-         <StackLayout row="2">
-            <StackLayout class="p-10 border" *ngIf="leader">
-                <Image [src]="BaseURL + leader.image"></Image>
-                <StackLayout>
-                    <Label class="h2" [text]="leader.name"></Label>
-                    <Label class="body" [text]="leader.description" textWrap="true"></Label>
-                </StackLayout>
+        </GridLayout>
+        <ActivityIndicator busy="true" *ngIf="!(promotion || promoErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+        <Label *ngIf="promoErrMess" [text]="'Error: ' + promoErrMess"></Label>
+         <GridLayout id="leftCard" row="0" margin="5" rows="* auto" columns="*" *ngIf="leader" [visibility]="showRightCard ? 'visible' : 'collapsed'" class="border">
+            <Image [src]="BaseURL + leader.image"></Image>
+            <StackLayout>
+                <Label class="h2" [text]="leader.name"></Label>
+                <Label class="body" [text]="leader.description" textWrap="true"></Label>
             </StackLayout>
-            <ActivityIndicator busy="true" *ngIf="!(leader || leaderErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-            <Label *ngIf="leaderErrMess" [text]="'Error: ' + leaderErrMess"></Label>
-        </StackLayout>
+        </GridLayout>
+        <ActivityIndicator busy="true" *ngIf="!(leader || leaderErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+        <Label *ngIf="leaderErrMess" [text]="'Error: ' + leaderErrMess"></Label>
     </GridLayout>
-</ScrollView>
+</StackLayout>
