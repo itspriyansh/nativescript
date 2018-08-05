@@ -1,8 +1,8 @@
 <ActionBar title="Reserve Table" class="action-bar">
     <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
 </ActionBar>
-<ScrollView orientation="vertical" class="page">
-    <GridLayout rows="auto auto auto auto" columns="*, *" class="m-5" [formGroup]="reservation">
+<StackLayout orientation="vertical" class="page">
+    <GridLayout id="reservationForm" [visibility]="showForm ? 'visible' : 'collapsed'" rows="auto auto auto auto" columns="*, *" class="m-5" [formGroup]="reservation">
         <Label class="h3 m-15" row="0" col="0" text="No. of Guests" textWrap="true"></Label>
         <TextField class="input input-border" id="textGuests" hint="Enter Number of Guests" [text]='' (tap)="createModalView('guest')"
         (textChange)="onGuestChange($event)" row="0" col="1" formControlName="guests"></TextField>
@@ -14,4 +14,12 @@
         (textChange)="onDateTimeChange($event)" row="2" col="1" formControlName="dateTime"></TextField>
         <Button class="btn btn-primary btn-active m-15" row="3" col="0" text="Submit" (tap)="onSubmit()"></Button>
     </GridLayout>
-</ScrollView>
+    <GridLayout id="submittedForm" [visibility]="!(showForm) ? 'visible' : 'collapsed'" rows="auto auto auto" columns="*, *" class="m-5">
+        <Label class="h3 m-15" row="0" col="0" text="No. of Guests" textWrap="true"></Label>
+        <Label class="h3 m-15" row="0" col="1" [text]="reservation.value.guests" textWrap="true"></Label>
+        <Label class="h3 m-15" row="1" col="0" text="Smoking?" textWrap="true"></Label>
+        <Label class="m-15" row="1" col="1" [text]="reservation.value.smoking" textWrap="true"></Label>
+        <Label class="h3 m-15" row="2" col="0" text="Date and Time" textWrap="true"></Label>
+        <Label class="h3 m-15" row="2" col="1" [text]="reservation.value.dateTime | date:'medium'" textWrap="true"></Label>
+    </GridLayout>
+</StackLayout>
