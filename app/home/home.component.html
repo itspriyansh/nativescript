@@ -1,4 +1,5 @@
 <ActionBar title="Home" class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
 </ActionBar>
 <StackLayout (swipe)="onSwipe($event)" class="page">
     <GridLayout horizontalAlignment="center" verticalAlignment="center" rows="*" columns="*" height="95%">
