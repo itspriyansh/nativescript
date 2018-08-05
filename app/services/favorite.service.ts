@@ -11,17 +11,20 @@ import { map } from 'rxjs/operators';
 export class FavoriteService{
 
     favorites: Array<number>;
+    docId: string;
 
     constructor(private dishService: DishService) {
         this.favorites = [];
+
     }
 
     isFavorite(id: number): boolean {
         return this.favorites.some(el => el === id);
     }
     addFavorite(id: number): boolean {
-        if(!this.isFavorite(id))
+        if(!this.isFavorite(id)){
             this.favorites.push(id);
+        }
         return true;
     }
     getFavorites(): Observable<Dish[]> {
