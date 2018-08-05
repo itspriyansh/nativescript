@@ -174,7 +174,7 @@ export class HomeComponent implements OnInit{
                     }).then(() => {
                         this.showRightCard = false;
                         this.showMiddleCard = true;
-                        this.leftCard.animate({
+                        this.middleCard.animate({
                             translate: { x: 0, y: 0 },
                             duration: 500,
                             curve: enums.AnimationCurve.easeInOut
