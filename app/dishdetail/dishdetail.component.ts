@@ -11,6 +11,12 @@ import { Toasty } from 'nativescript-toasty';
 import { action } from 'ui/dialogs';
 import { ModalDialogOptions, ModalDialogService } from 'nativescript-angular/modal-dialog';
 import { CommentComponent } from '../comment/comment.component';
+import { Page } from 'ui/page';
+import { Animation, AnimationDefinition } from 'ui/animation';
+import { View } from 'ui/core/view';
+import { SwipeDirection, SwipeGestureEventData } from 'ui/gestures';
+import { Color } from 'color';
+import * as enums from 'ui/enums';
 
 @Component({
     selector: 'app-dishdetail',
@@ -25,6 +31,10 @@ export class DishdetailComponent implements OnInit{
     avgstars: string;
     numcomments: number;
     favorite: boolean = false;
+    cardImage: View;
+    commentList: View;
+    cardLayout: View;
+    showComments: boolean = false;
 
     constructor(private dishService: DishService,
         private route: ActivatedRoute,
@@ -33,7 +43,8 @@ export class DishdetailComponent implements OnInit{
         private favoriteService: FavoriteService,
         public fonticon: TNSFontIconService,
         private vcRef: ViewContainerRef,
-        private modalService: ModalDialogService){ }
+        private modalService: ModalDialogService,
+        private page: Page){ }
     
     ngOnInit() {
         this.route.params
@@ -93,5 +104,84 @@ export class DishdetailComponent implements OnInit{
                     console.log('Comment Form Invalid!');
                 }
             });
+    }
+    onSwipe(args: SwipeGestureEventData) {
+        if(this.dish) {
+            this.cardImage = <View>this.page.getViewById<View>('cardImage');
+            this.commentList = <View>this.page.getViewById<View>('commentList');
+            this.cardLayout = <View>this.page.getViewById<View>('cardLayout');
+            if(args.direction === SwipeDirection.up && !this.showComments) {
+                this.animateUp();
+            } else if(args.direction === SwipeDirection.down && this.showComments) {
+                this.showComments = false;
+                this.animateDown();
+            }
+        }
+    }
+    showAndHideComments() {
+        if(this.dish) {
+            this.cardImage = <View>this.page.getViewById<View>('cardImage');
+            this.commentList = <View>this.page.getViewById<View>('commentList');
+            this.cardLayout = <View>this.page.getViewById<View>('cardLayout');
+            if(!this.showComments) {
+                this.animateUp();
+            } else if(this.showComments) {
+                this.showComments = false;
+                this.animateDown();
+            }
+        }
+    }
+    animateUp() {
+        let definitions = new Array<AnimationDefinition>();
+        let a1: AnimationDefinition = {
+            target: this.cardImage,
+            scale: { x: 1, y: 0 },
+            translate: { x: 0, y: -200 },
+            opacity: 0,
+            duration: 500,
+            curve: enums.AnimationCurve.easeIn
+        };
+        definitions.push(a1);
+
+        let a2: AnimationDefinition = {
+            target: this.cardLayout,
+            backgroundColor: new Color('#ffc107'),
+            duration: 500,
+            curve: enums.AnimationCurve.easeIn
+        };
+        definitions.push(a2);
+
+        let definitionSet = new Animation(definitions);
+
+        definitionSet.play().then(() => {
+            this.showComments = true;
+        })
+            .catch((e) => { console.log(e.message); });
+    }
+
+    animateDown() {
+        let definitions = new Array<AnimationDefinition>();
+        let a1: AnimationDefinition = {
+            target: this.cardImage,
+            scale: { x: 1, y: 1 },
+            translate: { x: 0, y: 0 },
+            opacity: 1,
+            duration: 500,
+            curve: enums.AnimationCurve.easeIn
+        };
+        definitions.push(a1);
+
+        let a2: AnimationDefinition = {
+            target: this.cardLayout,
+            backgroundColor: new Color('#ffffff'),
+            duration: 500,
+            curve: enums.AnimationCurve.easeIn
+        };
+        definitions.push(a2);
+
+        let definitionSet = new Animation(definitions);
+
+        definitionSet.play().then(() => {})
+            .catch((e) => { console.log(e.message); });
     }
 }
