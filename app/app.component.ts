@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
 
     onNavItemTap(navItemRoute: string): void {
         this.routerExtensions.navigate([navItemRoute], {
+            clearHistory: true,
             transition: {
                 name: "fade"
             }
