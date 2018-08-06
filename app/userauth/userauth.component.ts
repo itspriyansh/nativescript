@@ -7,6 +7,7 @@ import * as camera from 'nativescript-camera';
 import { Image } from 'ui/image';
 import * as app from 'application';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import * as ImagePicker from 'nativescript-imagepicker';
 
 @Component({
     moduleId: module.id,
@@ -79,5 +80,19 @@ export class UserAuthComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+    getFromLibrary() {
+        let context = ImagePicker.create({
+            mode: 'single'
+        });
+        context.authorize().then(() => {
+            context.present().then((selection) => {
+                let image = <Image>this.page.getViewById<Image>('myPicture');
+                console.log('Selection Done!');
+                selection.forEach((selected) => {
+                    image.src = selected;
+                });
+            }).catch((err) => console.log('Error -> ' + err.message));
+        }).catch((err) => console.log('Autorization Failed!'));
     }
 }
