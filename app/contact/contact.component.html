@@ -2,8 +2,8 @@
     <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
 </ActionBar>
 <ScrollView orientation="vertical" class="page">
-    <GridLayout rows="auto">
-        <StackLayout row="0" class="m-5 p-10 border">
+    <GridLayout class="m-5" rows="auto, auto">
+        <StackLayout row="0" class="p-10 border">
             <Label class="h3" text="Contact Information"></Label>
             <StackLayout class="m-t-20 m-l-30">
                 <Label class="body" text="121, Clear Water Bay Road"></Label>
@@ -14,5 +14,9 @@
                 <Label class="body" text="Email:confusion@food.net"></Label>
             </StackLayout>
         </StackLayout>
+        <GridLayout row="1" orientation="horizontal" rows="*" columns="*, *" class="m-t-20">
+            <Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" class="btn btn-rounded-sm btn-outline no-border fa"></Button>
+            <Button row="0" col="1" [text]="('fa-envelope-o' | fonticon) + ' Email'" class="btn btn-rounded-sm btn-outline no-border fa" (tap)="sendEmail()"></Button>
+        </GridLayout>
     </GridLayout>
 </ScrollView>
